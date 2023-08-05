@@ -1,5 +1,7 @@
 package com.Joysbrightt.ExpenseTracker.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,8 @@ import java.util.Map;
 @Builder
 public class Dashboard {
     @Id
-    private String  userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private User userId;
 
     private double accountBalance;
 

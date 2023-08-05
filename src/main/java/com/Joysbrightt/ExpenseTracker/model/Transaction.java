@@ -13,7 +13,7 @@ public class Transaction {
 
     private String transactionId;
 
-    private String userId;
+    private User userId;
 
     private double amount;
 

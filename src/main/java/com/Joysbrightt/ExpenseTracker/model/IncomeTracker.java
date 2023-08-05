@@ -14,7 +14,7 @@ public class IncomeTracker {
 
     private String incomeId;
 
-    private String userId;
+    private User userId;
 
     private double amount;
 

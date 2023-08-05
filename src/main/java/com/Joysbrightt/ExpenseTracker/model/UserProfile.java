@@ -11,7 +11,7 @@ import java.util.Map;
 @Builder
 public class UserProfile {
 
-    private String userId;
+    private User userId;
 
     private String fullName;
 
