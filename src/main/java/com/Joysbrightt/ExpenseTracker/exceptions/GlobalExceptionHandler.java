@@ -24,4 +24,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(expenseException.getMessage());
         }
 
+        @ExceptionHandler(TransactionNotFoundException.class)
+    public ResponseEntity<String > handleTransactionNotFoundException (TransactionNotFoundException transactionNotFoundException){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(transactionNotFoundException.getMessage());
+        }
+
 }

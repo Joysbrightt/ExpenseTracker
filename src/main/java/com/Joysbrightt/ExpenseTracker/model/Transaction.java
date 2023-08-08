@@ -1,28 +1,67 @@
 package com.Joysbrightt.ExpenseTracker.model;
 
-import lombok.Builder;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Component
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
+@Entity
+@Table(name = "transaction")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transaction {
 
-    private String transactionId;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long transactionId;
 
-    private User userId;
+//    private User userId;
 
-    private double amount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "expense_id")
+    @ToString.Exclude
+    private Expense expense;
+
+    @Column(nullable = false)
+    private BigDecimal amount;
 
     private String category;
 
-    private LocalDateTime time;
+    @Column(nullable = false)
+    private LocalDateTime transactionDate;
 
     private String description;
 
     private String type;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "expenses_id")
+    private Expense expenses;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Transaction that = (Transaction) o;
+        return getTransactionId() != null && Objects.equals(getTransactionId(), that.getTransactionId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    public Long getId(){
+        return transactionId;
+    }
 }

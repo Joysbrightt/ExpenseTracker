@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
+
 public class Budget {
 
     private String budgetId;
