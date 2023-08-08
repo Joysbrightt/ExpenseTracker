@@ -2,6 +2,7 @@ package com.Joysbrightt.ExpenseTracker.service;
 
 import com.Joysbrightt.ExpenseTracker.data.UserRepository;
 import com.Joysbrightt.ExpenseTracker.dtos.CreateUserRequest;
+import com.Joysbrightt.ExpenseTracker.dtos.LoginUser;
 import com.Joysbrightt.ExpenseTracker.exceptions.UserAlreadyExistsException;
 import com.Joysbrightt.ExpenseTracker.exceptions.UserNotFoundException;
 import com.Joysbrightt.ExpenseTracker.model.User;
@@ -42,6 +43,19 @@ private final UserRepository userRepository;
                 .username(userRequest.getFullName())
                 .build();
         return userRepository.save(user);
+    }
+
+    @Override
+    public User loginUser(LoginUser loginUser) {
+
+        if (userRepository.findByUsername(loginUser.getUsername()) == null){
+            throw new UserNotFoundException("Username could not be found");
+        }
+        User user = User.builder()
+                .email(loginUser.getUsername())
+                .password(String.valueOf(loginUser.getPassword()))
+                .build();
+        return user;
     }
 
 

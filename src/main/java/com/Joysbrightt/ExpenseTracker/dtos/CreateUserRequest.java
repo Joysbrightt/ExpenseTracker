@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 @Data
-@NoArgsConstructor
+
 @Builder
 @Validated
 public class CreateUserRequest {

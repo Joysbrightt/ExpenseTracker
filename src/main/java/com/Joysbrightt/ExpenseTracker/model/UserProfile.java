@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.Map;
 
 @Data
-@NoArgsConstructor
+
 @Builder
 public class UserProfile {
 

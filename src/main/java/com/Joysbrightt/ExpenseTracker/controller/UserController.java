@@ -1,13 +1,14 @@
 package com.Joysbrightt.ExpenseTracker.controller;
 
 import com.Joysbrightt.ExpenseTracker.dtos.CreateUserRequest;
+import com.Joysbrightt.ExpenseTracker.dtos.LoginUser;
 import com.Joysbrightt.ExpenseTracker.model.User;
 import com.Joysbrightt.ExpenseTracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,11 @@ public class UserController {
         User user = userService.createUser(request);
 
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @GetMapping("login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginUser loginUser){
+        User user = userService.loginUser(loginUser);
+        return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
 }
