@@ -1,6 +1,8 @@
 package com.Joysbrightt.ExpenseTracker.service;
 
 import com.Joysbrightt.ExpenseTracker.data.ExpenseRepository;
+import com.Joysbrightt.ExpenseTracker.data.TransactionRepository;
+import com.Joysbrightt.ExpenseTracker.enumClass.TransactionType;
 import com.Joysbrightt.ExpenseTracker.exceptions.ExpenseException;
 import com.Joysbrightt.ExpenseTracker.exceptions.TransactionNotFoundException;
 import com.Joysbrightt.ExpenseTracker.model.Expense;
@@ -30,6 +32,8 @@ private ExpenseRepository expenseRepository;
 
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     @Override
     public Expense getExpenseById(Long expenseId) {
@@ -38,7 +42,7 @@ private ExpenseRepository expenseRepository;
         if (expenseOptional.isPresent()) {
             return expenseOptional.get();
         } else {
-            throw new ExpenseException("Expense not found with ID: " + expenseId);
+            throw new ExpenseException("EXPENSE not found with ID: " + expenseId);
         }
     }
 
@@ -54,6 +58,19 @@ private ExpenseRepository expenseRepository;
         return expense;
     }
 
+    public  Transaction addExpenseTransaction(Long expenseId, Transaction transaction){
+        Expense expense = getExpenseById(expenseId);
+
+        // Set the transaction type to EXPENSE
+        transaction.setType(TransactionType.EXPENSE.getValue());
+        expense.getTransactions().add(transaction);
+        transaction.setExpenses(expense);
+
+        // Save the updated expense and return the saved transaction
+        expenseRepository.saveAndFlush(expense);
+        return transactionRepository.save(transaction);
+    }
+
 
     @Override
     public List<Expense> getAllExpenseByUser(User user) {
@@ -63,7 +80,7 @@ private ExpenseRepository expenseRepository;
     @Override
     public Transaction getTransaction(Long expenseId, Long transactionId) {
         Expense expense = expenseRepository.findById(expenseId)
-                .orElseThrow(() -> new ExpenseException("Expense not found"));
+                .orElseThrow(() -> new ExpenseException("EXPENSE not found"));
 
         return expense.getTransactions().stream()
                 .filter(transaction -> transaction.getId().equals(transactionId))

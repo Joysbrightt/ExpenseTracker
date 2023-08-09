@@ -17,4 +17,6 @@ public interface ExpenseService {
 
  Transaction getTransaction(Long expenseId, Long transactionId);
 
+ Transaction addExpenseTransaction(Long expenseId, Transaction transaction);
+
 }

@@ -44,6 +44,10 @@ public class Transaction {
 
     private String type;
 
+    @ManyToOne
+    @JoinColumn(name = "income_id")
+    private Income income;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "expenses_id")
     private Expense expenses;
@@ -63,5 +67,9 @@ public class Transaction {
 
     public Long getId(){
         return transactionId;
+    }
+
+    public void setIncome(Income income) {
+        this.income = income;
     }
 }

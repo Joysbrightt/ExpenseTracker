@@ -1,5 +1,6 @@
 package com.Joysbrightt.ExpenseTracker.exceptions;
 
+import com.Joysbrightt.ExpenseTracker.enumClass.TransactionType;
 import com.Joysbrightt.ExpenseTracker.model.Expense;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,4 +30,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(transactionNotFoundException.getMessage());
         }
 
+    @ExceptionHandler(TransactionTypeException.class)
+    public ResponseEntity<String> handleTransactionTypeException(TransactionTypeException transactionTypeException){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(transactionTypeException.getMessage());
+    }
 }
