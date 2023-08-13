@@ -7,6 +7,7 @@ import com.Joysbrightt.ExpenseTracker.model.Income;
 import com.Joysbrightt.ExpenseTracker.model.Transaction;
 import com.Joysbrightt.ExpenseTracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,5 +68,12 @@ public class IncomeServiceImpl implements IncomeService{
         Optional<Income> income = getIncomeById(incomeId);
         incomeRepository.delete(income);
         return false;
+    }
+
+    @Override
+    public List<Income> getRecentIncomes(User user, Pageable limit) {
+
+        // Retrieve the recent incomes for the user
+        return incomeRepository.findRecentIncomesByUser(user, limit);
     }
 }

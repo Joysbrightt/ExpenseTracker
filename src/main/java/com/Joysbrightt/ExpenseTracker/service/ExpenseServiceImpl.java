@@ -9,6 +9,10 @@ import com.Joysbrightt.ExpenseTracker.model.Expense;
 import com.Joysbrightt.ExpenseTracker.model.Transaction;
 import com.Joysbrightt.ExpenseTracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,6 +74,12 @@ private ExpenseRepository expenseRepository;
         // Save the updated expense and return the saved transaction
         expenseRepository.saveAndFlush(expense);
         return transactionRepository.save(transaction);
+    }
+
+    @Override
+    public Page<Expense> getRecentExpenses(User user, Pageable pageable) {
+
+        return (Page<Expense>) expenseRepository.findByUserId(user.getUserId(), pageable);
     }
 
 

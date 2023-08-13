@@ -15,4 +15,6 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
     void delete(Optional<Income> income);
 
     List<Income> findByUser(User user);
+
+    List<Income> findRecentIncomesByUser(User user, int limit);
 }

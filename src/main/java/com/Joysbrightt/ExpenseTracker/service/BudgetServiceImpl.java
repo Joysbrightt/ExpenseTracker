@@ -77,7 +77,9 @@ public class BudgetServiceImpl implements BudgetService{
                 existingExpense.setExpenseDate(updatedExpense.getExpenseDate());
                 existingExpense.setDescription(updatedExpense.getDescription());
                 expenseService.updateExpense(existingExpense.getExpenseId(), existingExpense);
-
+// An Expense Tracker is a project that can help you manage your personal finances effectively.
+// It allows users to track their income, expenses,
+// and budgeting in a user-friendly and organized manner
             }
         }
                 return budgetRepository.save(budget);
