@@ -17,7 +17,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "expenses")
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Expense {
     @Id

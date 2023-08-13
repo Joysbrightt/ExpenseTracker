@@ -1,12 +1,15 @@
 package com.Joysbrightt.ExpenseTracker.service;
 
 import com.Joysbrightt.ExpenseTracker.data.IncomeRepository;
+import com.Joysbrightt.ExpenseTracker.data.UserRepository;
 import com.Joysbrightt.ExpenseTracker.enumClass.TransactionType;
 import com.Joysbrightt.ExpenseTracker.exceptions.IncomeNotfoundException;
+import com.Joysbrightt.ExpenseTracker.exceptions.UserNotFoundException;
 import com.Joysbrightt.ExpenseTracker.model.Income;
 import com.Joysbrightt.ExpenseTracker.model.Transaction;
 import com.Joysbrightt.ExpenseTracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,9 @@ import java.util.Optional;
 public class IncomeServiceImpl implements IncomeService{
 
     private final IncomeRepository incomeRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public IncomeServiceImpl(IncomeRepository incomeRepository, TransactionService transactionService) {
@@ -71,9 +77,13 @@ public class IncomeServiceImpl implements IncomeService{
     }
 
     @Override
-    public List<Income> getRecentIncomes(User user, Pageable limit) {
+    public Page<Income> getRecentIncomes(Long userId, Pageable pageable) {
 
         // Retrieve the recent incomes for the user
-        return incomeRepository.findRecentIncomesByUser(user, limit);
+        User user = userRepository.findUserById(userId);
+        if (!userRepository.existsById(userId)){
+            throw new UserNotFoundException("User not found");
+        }
+        return (Page<Income>) incomeRepository.findRecentIncomesByUser(user, pageable);
     }
 }

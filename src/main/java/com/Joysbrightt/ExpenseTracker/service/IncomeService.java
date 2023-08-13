@@ -2,6 +2,7 @@ package com.Joysbrightt.ExpenseTracker.service;
 
 import com.Joysbrightt.ExpenseTracker.model.Income;
 import com.Joysbrightt.ExpenseTracker.model.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public interface IncomeService {
 
     boolean deleteIncome(Long incomeId);
 
-    List<Income> getRecentIncomes(User user, Pageable limit);
+    Page<Income> getRecentIncomes(Long userId, Pageable limit);
 
 }

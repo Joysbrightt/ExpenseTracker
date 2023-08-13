@@ -17,7 +17,6 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "transaction")
-@NoArgsConstructor
 @AllArgsConstructor
 public class Transaction {
 

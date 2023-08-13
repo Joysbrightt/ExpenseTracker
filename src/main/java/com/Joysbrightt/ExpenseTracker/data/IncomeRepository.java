@@ -2,6 +2,7 @@ package com.Joysbrightt.ExpenseTracker.data;
 
 import com.Joysbrightt.ExpenseTracker.model.Income;
 import com.Joysbrightt.ExpenseTracker.model.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.swing.text.html.Option;
@@ -16,5 +17,5 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
 
     List<Income> findByUser(User user);
 
-    List<Income> findRecentIncomesByUser(User user, int limit);
+    List<Income> findRecentIncomesByUser(User user, Pageable pageable);
 }

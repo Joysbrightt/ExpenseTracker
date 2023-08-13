@@ -13,7 +13,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Builder
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 public class Income {
     @Id

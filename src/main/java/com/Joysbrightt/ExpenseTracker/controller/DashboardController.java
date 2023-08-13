@@ -39,8 +39,8 @@ public class DashboardController {
         int page = 0;
         int size = 5;
         Pageable pageable = PageRequest.of(page,size, Sort.by("expenseDate").descending());
-        Page<Expense> recentExpensesPage = (Page<Expense>) expenseService.getRecentExpenses(user, pageable);
-        Page<Income> recentIncomePage = (Page<Income>) incomeService.getRecentIncomes(user,pageable);
+        Page<Expense> recentExpensesPage = expenseService.getRecentExpenses(user, pageable);
+        Page<Income> recentIncomePage = incomeService.getRecentIncomes(user,pageable);
 
         List<Income> recentIncome = recentIncomePage.getContent();
         List<Expense> recentExpenses = recentExpensesPage.getContent();
