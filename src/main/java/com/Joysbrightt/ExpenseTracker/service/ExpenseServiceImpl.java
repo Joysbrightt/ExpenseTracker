@@ -10,6 +10,7 @@ import com.Joysbrightt.ExpenseTracker.model.Transaction;
 import com.Joysbrightt.ExpenseTracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -90,5 +91,36 @@ private ExpenseRepository expenseRepository;
 
     public List<Expense> getExpenseByUser(Long userId){
         return expenseRepository.findByUser(user);
+    }
+
+    @Override
+    @Transactional
+    public Expense updateExpense(Long expenseId, Expense updatedExpense) {
+        Expense expense = getExpenseById(expenseId);
+
+        expense.setAmount(updatedExpense.getAmount());
+        expense.setExpenseDate(updatedExpense.getExpenseDate());
+        expense.setDescription(updatedExpense.getDescription());
+
+        // Update the transaction associated with the expense
+        List<Transaction> updatedTransactions = updatedExpense.getTransactions();
+        List<Transaction> existingTransactions = expense.getTransactions();
+
+
+        if (updatedExpense.getTransaction() != null){
+            for (int i = 0; i < updatedTransactions.size(); i++) {
+                Transaction updatedTransaction = updatedTransactions.get(i);
+                Transaction existingTransaction = existingTransactions.get(i);
+
+                existingTransaction.setAmount(updatedTransaction.getAmount());
+                existingTransaction.setTransactionDate(updatedTransaction.getTransactionDate());
+                // Set the transaction type
+                existingTransaction.setType(TransactionType.EXPENSE.getValue());
+
+                transactionRepository.save(existingTransaction);
+            }
+             }
+
+            return expenseRepository.save(expense);
     }
 }

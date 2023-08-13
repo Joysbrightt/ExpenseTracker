@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/expenses")
 public class ExpenseController {
 
     @Autowired
@@ -53,5 +53,13 @@ public class ExpenseController {
         } catch (ExpenseException | TransactionTypeException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+
+    @PutMapping("/{expenseId]")
+    public ResponseEntity<Expense> updateExpense(@PathVariable Long expenseId, @RequestBody Expense updateExpense){
+        Expense expense = expenseService.updateExpense(expenseId, updateExpense);
+
+        return ResponseEntity.ok(expense);
     }
 }

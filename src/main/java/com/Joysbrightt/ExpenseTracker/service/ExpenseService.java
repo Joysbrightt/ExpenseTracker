@@ -11,6 +11,8 @@ public interface ExpenseService {
  Expense addExpense(Expense expense);
  Expense getExpenseById(Long expenseId);
 
+ Expense updateExpense(Long expenseId, Expense updatedExpense);
+
  List<Expense> getExpenseByUser(Long userId);
 
  List<Expense> getAllExpenseByUser(User user);
