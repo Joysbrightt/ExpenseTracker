@@ -1,14 +1,9 @@
 package com.Joysbrightt.ExpenseTracker.service;
 
-import com.mailgun.client.MailgunClient;
-import com.mailgun.model.message.Message;
-import net.sargue.mailgun.Mail;
-import org.apache.tomcat.util.descriptor.web.MessageDestination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import java.text.MessageFormat;
 
 public class MailgunServiceImpl implements MailgunService{
 
@@ -18,7 +13,7 @@ private final String domain = "https://app.mailgun.com/app/sending/domains/sandb
 @Autowired
 private JavaMailSender javaMailSender;
     @Override
-    public void sendEmail(String to, String subject, String text, String body) {
+    public void sendEmail(String to, String subject, String body) {
 
 //        MailgunClient mailgunClient = new Mail
 
