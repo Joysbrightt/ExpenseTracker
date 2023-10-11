@@ -1,21 +1,28 @@
 package com.Joysbrightt.ExpenseTracker.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.validation.annotation.Validated;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Validated
+@Entity
+@Table(name = "\"user\"")
+@RequiredArgsConstructor
+
 public class User {
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId", nullable = false)
+
     private Long userId;
 
     private String username;
@@ -24,4 +31,7 @@ public class User {
 
     private String password;
 
+    public User(Long userId, String username, String email, String password) {
+
+    }
 }

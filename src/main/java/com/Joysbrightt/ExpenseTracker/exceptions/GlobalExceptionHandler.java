@@ -1,7 +1,5 @@
 package com.Joysbrightt.ExpenseTracker.exceptions;
 
-import com.Joysbrightt.ExpenseTracker.enumClass.TransactionType;
-import com.Joysbrightt.ExpenseTracker.model.Expense;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

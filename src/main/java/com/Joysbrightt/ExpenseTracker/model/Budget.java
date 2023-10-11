@@ -1,22 +1,27 @@
 package com.Joysbrightt.ExpenseTracker.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Builder
+@Entity
+@Table(name = "Budget")
 
+@AllArgsConstructor
 public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String budgetId;
+    @Column(name = "id", nullable = false)
+    private Long budgetId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,10 +32,23 @@ public class Budget {
     private BigDecimal amount;
 
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
-    private List<Expense> expenses = new ArrayList<>();
+    @ToString.Exclude
+    private List<Expense> expenses;
 
     private String weeklyPeriod;
 
     private String monthlyPeriod;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Budget budget = (Budget) o;
+        return getBudgetId() != null && Objects.equals(getBudgetId(), budget.getBudgetId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

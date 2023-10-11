@@ -22,11 +22,13 @@ public class Transaction {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long transactionId;
+        @Column(name = "transactionId", nullable = false)
+
+        private Long transactionId;
 
 //    private User userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "expense_id")
     @ToString.Exclude
     private Expense expense;
@@ -47,10 +49,6 @@ public class Transaction {
     @JoinColumn(name = "income_id")
     private Income income;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "expenses_id")
-    private Expense expenses;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,5 +68,9 @@ public class Transaction {
 
     public void setIncome(Income income) {
         this.income = income;
+    }
+
+    public void setExpense(Expense expense) {
+        this.expense = expense;
     }
 }

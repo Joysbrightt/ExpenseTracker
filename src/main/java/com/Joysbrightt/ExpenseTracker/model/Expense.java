@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,30 +15,30 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "expenses")
+@Table(name = "expense")
 @Builder
 @AllArgsConstructor
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "ExpenseId", nullable = false)
     private Long expenseId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     private BigDecimal amount;
 
     @Column(nullable = false)
-    private LocalDate expenseDate;
+    private LocalDateTime expenseDate;
 
     private String category;
 
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "expenses", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
     private List<Transaction> transaction = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)

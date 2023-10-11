@@ -1,21 +1,23 @@
 package com.Joysbrightt.ExpenseTracker.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Map;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
+@Setter
+@Getter
+public class UserProfile extends User {
 
-@Builder
-public class UserProfile {
+    private User user;
 
-    private User userId;
-
-    private String fullName;
+//    private String fullName;
 
     private byte profileImage;
 
     private Map<String, String > settings;
+
+    public UserProfile(Long userId, String username, String email, String password) {
+        super(userId, username, email, password);
+    }
 }

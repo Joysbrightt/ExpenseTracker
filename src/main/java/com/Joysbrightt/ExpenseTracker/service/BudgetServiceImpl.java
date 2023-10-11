@@ -20,7 +20,6 @@ public class BudgetServiceImpl implements BudgetService{
 
     public BudgetServiceImpl(BudgetRepository budgetRepository, ExpenseService expenseService) {
         this.budgetRepository = budgetRepository;
-        this.expenseService = this.expenseService;
     }
 
   /* @Transactional annotation is applied to the method,
@@ -34,7 +33,7 @@ public class BudgetServiceImpl implements BudgetService{
       // Save the budget
       Budget savedBudget = budgetRepository.save(budget);
 
-      // Associate expenses with the budget if needed
+      // Associate expense with the budget if needed
       List<Expense> expenses = budget.getExpenses();
       if (expenses != null & !expenses.isEmpty()){
           for (Expense expense : expenses){
@@ -78,7 +77,7 @@ public class BudgetServiceImpl implements BudgetService{
                 existingExpense.setDescription(updatedExpense.getDescription());
                 expenseService.updateExpense(existingExpense.getExpenseId(), existingExpense);
 // An Expense Tracker is a project that can help you manage your personal finances effectively.
-// It allows users to track their income, expenses,
+// It allows users to track their income, expense,
 // and budgeting in a user-friendly and organized manner
             }
         }

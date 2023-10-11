@@ -10,9 +10,7 @@ import com.Joysbrightt.ExpenseTracker.model.Transaction;
 import com.Joysbrightt.ExpenseTracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,8 +52,8 @@ private ExpenseRepository expenseRepository;
     public Expense addExpense(Expense expense) {
         Transaction transaction = new Transaction();
         transaction.setAmount(expense.getAmount());
-        transaction.setTransactionDate(expense.getExpenseDate().atStartOfDay());
-        transaction.setExpenses(expense);
+        transaction.setTransactionDate(expense.getExpenseDate());
+        transaction.setExpense(expense);
 
          transactionService.addTransaction(transaction);
 
@@ -69,7 +67,7 @@ private ExpenseRepository expenseRepository;
         // Set the transaction type to EXPENSE
         transaction.setType(TransactionType.EXPENSE.getValue());
         expense.getTransactions().add(transaction);
-        transaction.setExpenses(expense);
+        transaction.setExpense(expense);
 
         // Save the updated expense and return the saved transaction
         expenseRepository.saveAndFlush(expense);
