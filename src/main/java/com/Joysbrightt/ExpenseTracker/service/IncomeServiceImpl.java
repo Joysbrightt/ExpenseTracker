@@ -30,6 +30,7 @@ public class IncomeServiceImpl implements IncomeService{
         this.transactionService = transactionService;
     }
 
+
     @Autowired
     private final TransactionService transactionService;
 
@@ -70,20 +71,22 @@ public class IncomeServiceImpl implements IncomeService{
 
     @Override
     public boolean deleteIncome(Long incomeId) {
-
         Optional<Income> income = getIncomeById(incomeId);
-        incomeRepository.delete(income);
+        if (income.isPresent()) {
+            incomeRepository.delete(income.get());
+            return true;
+        }
         return false;
     }
 
+
     @Override
     public Page<Income> getRecentIncomes(Long userId, Pageable pageable) {
-
-        // Retrieve the recent incomes for the user
         User user = userRepository.findUserById(userId);
-        if (!userRepository.existsById(userId)){
+        if (user == null) {
             throw new UserNotFoundException("User not found");
         }
         return (Page<Income>) incomeRepository.findRecentIncomesByUser(user, pageable);
     }
+
 }
