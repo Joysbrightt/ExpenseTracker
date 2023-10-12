@@ -79,17 +79,31 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public Transaction updateTransaction(Long transactionId, Transaction updatedTransaction) {
         Transaction transaction = getTransactionById(transactionId, updatedTransaction);
-        if (updatedTransaction.getAmount() != null){
+
+        if (transaction == null) {
+            // Handle the case where the transaction doesn't exist
+            // You can throw an exception, return a custom response, or handle it as needed.
+            // For example, you can throw a NotFoundException.
+            throw new TransactionNotFoundException("Transaction not found");
+        }
+
+        if (updatedTransaction.getAmount() != null) {
             transaction.setAmount(updatedTransaction.getAmount());
         }
-        if (updatedTransaction.getDescription() != null){
+
+        if (updatedTransaction.getDescription() != null) {
             transaction.setDescription(updatedTransaction.getDescription());
         }
 
-        if (updatedTransaction.getCategory() != null){
+        if (updatedTransaction.getCategory() != null) {
+            transaction.setCategory(updatedTransaction.getCategory());
+        }
+
+        if (updatedTransaction.getTransactionDate() != null) {
             transaction.setTransactionDate(updatedTransaction.getTransactionDate());
         }
 
         return transactionRepository.save(transaction);
     }
+
 }
