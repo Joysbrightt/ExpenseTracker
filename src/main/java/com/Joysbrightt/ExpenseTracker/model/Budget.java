@@ -13,18 +13,18 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Builder
 @Entity
-@Table(name = "Budget")
+@Table(name = "budget")
 
 @AllArgsConstructor
 public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "budget_id", nullable = false)
     private Long budgetId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user")
     private User user;
 
     private String category;

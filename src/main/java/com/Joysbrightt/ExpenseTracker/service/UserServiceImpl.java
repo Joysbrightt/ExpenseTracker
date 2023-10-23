@@ -6,6 +6,7 @@ import com.Joysbrightt.ExpenseTracker.dtos.LoginUser;
 import com.Joysbrightt.ExpenseTracker.exceptions.UserAlreadyExistsException;
 import com.Joysbrightt.ExpenseTracker.exceptions.UserNotFoundException;
 import com.Joysbrightt.ExpenseTracker.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

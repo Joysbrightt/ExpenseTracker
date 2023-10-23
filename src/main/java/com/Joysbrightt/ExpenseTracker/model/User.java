@@ -3,14 +3,17 @@ package com.Joysbrightt.ExpenseTracker.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
+
+import java.net.PasswordAuthentication;
 
 @Data
 @AllArgsConstructor
 @Builder
 @Validated
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "user")
 @RequiredArgsConstructor
 
 public class User {
@@ -21,7 +24,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId", nullable = false)
+    @Column(name = "user", nullable = false)
 
     private Long userId;
 
@@ -29,7 +32,10 @@ public class User {
 
     private String email;
 
+    @Transient
     private String password;
+
+
 
     public User(Long userId, String username, String email, String password) {
 

@@ -29,7 +29,7 @@ public class Transaction {
 //    private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "expense_id")
+    @JoinColumn(name = "expense")
     @ToString.Exclude
     private Expense expense;
 
@@ -46,7 +46,7 @@ public class Transaction {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "income_id")
+    @JoinColumn(name = "income")
     private Income income;
 
     @Override

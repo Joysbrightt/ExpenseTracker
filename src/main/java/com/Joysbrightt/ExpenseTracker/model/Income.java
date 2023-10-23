@@ -13,6 +13,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Builder
 @Entity
+@Table(name = "income")
 @AllArgsConstructor
 public class Income {
     @Id
@@ -21,7 +22,7 @@ public class Income {
     private Long incomeId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user", nullable = false)
     private User user;
 
     private BigDecimal amount;

@@ -29,10 +29,7 @@ public class Dashboard {
     public Dashboard(List<Expense> recentExpenses, List<Income> recentIncome, List<Budget> budgets) {
     }
 
-    public Map<String, BigDecimal> getBudgetStatus() {
-        return budgetStatus;
-    }
-
+    @Getter
     Map<String, BigDecimal> budgetStatus;
 
 

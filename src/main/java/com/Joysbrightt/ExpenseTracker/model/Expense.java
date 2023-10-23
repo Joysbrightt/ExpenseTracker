@@ -25,7 +25,7 @@ public class Expense {
     private Long expenseId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user")
     private User user;
 
     private BigDecimal amount;
@@ -42,7 +42,7 @@ public class Expense {
     private List<Transaction> transaction = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "budget_id")
+    @JoinColumn(name = "budget")
     private Budget budget;
 
     public List<Transaction> getTransactions(){
